@@ -1,19 +1,27 @@
-.card {
-  height: 480px;
-  width: 400px;
+.results_card {
+  height: 490px;
+  width: 420px;
   background-color: #a8dadc;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 110px;
+  gap: 0px;
 }
 
 .results_buttons {
   display: flex;
   justify-content: center;
   gap: 40px;
-  padding-top: 20px;
+  margin-top: 10px;
+}
+
+p {
+  margin: 0px;
+}
+
+h2 {
+    margin: 0px;
+    margin-bottom: 10px;
 }

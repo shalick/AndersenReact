@@ -27,8 +27,8 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
     }
   };
   return (
-    <div className="card">
-      <Progress percent={(currentQuestion / questions.length) * 100} />
+    <div className="quiz_card">
+      <Progress percent={(currentQuestion / questions.length) * 100} className="quiz_progress"/>
       <h2 className="question_text">{question}</h2>
       <div className="answer_buttons">
         {choices.map((choice) => (
@@ -37,7 +37,7 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
           </Button>
         ))}
       </div>
-      <Countdown value={new Date().setMinutes(new Date().getMinutes() + 2)} />
+      <Countdown value={new Date().setMinutes(new Date().getMinutes() + 2)} format="mm:ss"/>
       <Button
         onClick={() => {
           setGameState("results");
