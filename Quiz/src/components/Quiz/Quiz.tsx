@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Progress, Button, Statistic } from "antd";
+import { useContext } from "react";
+import { QuizContext } from "../Helpers/Contexts";
 const { Countdown } = Statistic;
 import "./Quiz.css";
 
@@ -16,11 +18,12 @@ type Question = {
 const Quiz: React.FC<Questions> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
+  const { setGameState } = useContext(QuizContext);
   const onChoiceClick = () => {
     if (currentQuestion !== questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      setCurrentQuestion(0);
+      setGameState("results");
     }
   };
   return (
@@ -35,7 +38,13 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
         ))}
       </div>
       <Countdown value={new Date().setMinutes(new Date().getMinutes() + 2)} />
-      <Button>End quiz</Button>
+      <Button
+        onClick={() => {
+          setGameState("results");
+        }}
+      >
+        End quiz
+      </Button>
     </div>
   );
 };

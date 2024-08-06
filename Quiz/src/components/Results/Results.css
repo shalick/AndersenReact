@@ -1,0 +1,19 @@
+.card {
+  height: 480px;
+  width: 400px;
+  background-color: #a8dadc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 110px;
+}
+
+.results_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding-top: 20px;
+}
