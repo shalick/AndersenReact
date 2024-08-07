@@ -20,7 +20,7 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
   const onChoiceClick = useCallback(() => {
-    setCurrentQuestion(prev => (prev < questions.length - 1 ? prev + 1 : 0));
+    setCurrentQuestion((prev) => (prev < questions.length - 1 ? prev + 1 : 0));
   }, [questions.length, setCurrentQuestion]);
   return (
     <div className="quiz_card">
