@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Progress, Button, Statistic } from "antd";
 import { useContext } from "react";
 import { QuizContext } from "../Helpers/Contexts";
@@ -19,16 +19,15 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
   const { setGameState } = useContext(QuizContext);
-  const onChoiceClick = () => {
-    if (currentQuestion !== questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
-    } else {
-      setGameState("results");
-    }
-  };
+  const onChoiceClick = useCallback(() => {
+    setCurrentQuestion((prev) => (prev < questions.length - 1 ? prev + 1 : 0));
+  }, [questions.length, setCurrentQuestion]);
   return (
     <div className="quiz_card">
-      <Progress percent={(currentQuestion / questions.length) * 100} className="quiz_progress"/>
+      <Progress
+        percent={(currentQuestion / questions.length) * 100}
+        className="quiz_progress"
+      />
       <h2 className="question_text">{question}</h2>
       <div className="answer_buttons">
         {choices.map((choice) => (
@@ -37,7 +36,10 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
           </Button>
         ))}
       </div>
-      <Countdown value={new Date().setMinutes(new Date().getMinutes() + 2)} format="mm:ss"/>
+      <Countdown
+        value={new Date().setMinutes(new Date().getMinutes() + 2)}
+        format="mm:ss"
+      />
       <Button
         onClick={() => {
           setGameState("results");
