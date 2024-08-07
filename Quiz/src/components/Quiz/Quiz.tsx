@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Progress, Button, Statistic } from "antd";
 const { Countdown } = Statistic;
 import "./Quiz.css";
@@ -16,13 +16,9 @@ type Question = {
 const Quiz: React.FC<Questions> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
-  const onChoiceClick = () => {
-    if (currentQuestion !== questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
-    } else {
-      setCurrentQuestion(0);
-    }
-  };
+  const onChoiceClick = useCallback(() => {
+    setCurrentQuestion(prev => (prev < questions.length - 1) ? prev + 1 : 0);
+}, [questions.length, setCurrentQuestion]);
   return (
     <div className="card">
       <Progress percent={(currentQuestion / questions.length) * 100} />
