@@ -16,9 +16,9 @@ type Question = {
 };
 
 const Quiz: React.FC<Questions> = ({ questions }) => {
+  const { setGameState } = useContext(QuizContext);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
-  const { setGameState } = useContext(QuizContext);
   const onChoiceClick = useCallback(() => {
     setCurrentQuestion((prev) => (prev < questions.length - 1 ? prev + 1 : 0));
   }, [questions.length, setCurrentQuestion]);
