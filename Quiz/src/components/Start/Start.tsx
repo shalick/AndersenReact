@@ -1,10 +1,13 @@
 import "./Start.css";
+import { useContext } from "react";
+import { QuizContext } from "../Helpers/Contexts";
 import { InputNumber } from "antd";
 import { Select, Button } from "antd";
 
 const { Option } = Select;
 
 const Start = () => {
+  const { setGameState } = useContext(QuizContext);
   return (
     <div className="card">
       <h2 className="settings_title">Settings:</h2>
@@ -33,7 +36,13 @@ const Start = () => {
       </div>
 
       <div className="start_buttons">
-        <Button>Start quiz</Button>
+        <Button
+          onClick={() => {
+            setGameState("quiz");
+          }}
+        >
+          Start quiz
+        </Button>
         <Button>See my stats</Button>
       </div>
     </div>
