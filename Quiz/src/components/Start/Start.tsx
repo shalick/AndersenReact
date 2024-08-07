@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { QuizContext } from "../Helpers/Contexts";
 import { InputNumber } from "antd";
 import { Select, Button } from "antd";
+import { Link } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -36,13 +37,16 @@ const Start = () => {
       </div>
 
       <div className="start_buttons">
-        <Button
-          onClick={() => {
-            setGameState("quiz");
-          }}
-        >
-          Start quiz
-        </Button>
+        <Link to="/quiz">
+          <Button
+            onClick={() => {
+              setGameState("quiz");
+            }}
+          >
+            Start quiz
+          </Button>
+        </Link>
+
         <Button>See my stats</Button>
       </div>
     </div>

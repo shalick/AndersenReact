@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Progress, Button, Statistic } from "antd";
 import { useContext } from "react";
 import { QuizContext } from "../Helpers/Contexts";
@@ -19,9 +19,13 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
   const { setGameState } = useContext(QuizContext);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
-  const onChoiceClick = useCallback(() => {
-    setCurrentQuestion(prev => (prev < questions.length - 1) ? prev + 1 : 0);
-}, [questions.length, setCurrentQuestion]);
+  //   const onChoiceClick = useCallback(() => {
+  //     setCurrentQuestion(prev => (prev < questions.length - 1) ? prev + 1 : 0);
+  // }, [questions.length, setCurrentQuestion]);
+  const onChoiceClick = () =>
+    currentQuestion !== questions.length - 1
+      ? setCurrentQuestion((prev) => prev + 1)
+      : setGameState("results");
   return (
     <div className="quiz_card">
       <Progress
