@@ -1,4 +1,4 @@
-.start_card {
+.results_card {
   height: 490px;
   width: 420px;
   background-color: #a8dadc;
@@ -7,19 +7,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-}
-.settings_select {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+  gap: 0px;
 }
 
-.start_buttons {
+.results_buttons {
   display: flex;
   justify-content: center;
   gap: 40px;
-  padding-top: 20px;
+  margin-top: 10px;
+}
+
+p {
+  margin: 0px;
+}
+
+h2 {
+    margin: 0px;
+    margin-bottom: 10px;
 }
