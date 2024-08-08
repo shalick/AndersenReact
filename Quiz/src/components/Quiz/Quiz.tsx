@@ -20,8 +20,9 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
   const onChoiceClick = useCallback(() => {
-    setCurrentQuestion(prev => (prev < questions.length - 1) ? prev + 1 : 0);
-}, [questions.length, setCurrentQuestion]);
+    currentQuestion !== questions.length - 1 &&
+      setCurrentQuestion((prev) => prev + 1);
+  }, [questions.length, setCurrentQuestion]);
   return (
     <div className="quiz_card">
       <Progress
@@ -31,7 +32,14 @@ const Quiz: React.FC<Questions> = ({ questions }) => {
       <h2 className="question_text">{question}</h2>
       <div className="answer_buttons">
         {choices.map((choice) => (
-          <Button onClick={() => onChoiceClick()} key={choice}>
+          <Button
+            onClick={() =>
+              currentQuestion !== questions.length - 1
+                ? onChoiceClick()
+                : setGameState("results")
+            }
+            key={choice}
+          >
             {choice}
           </Button>
         ))}
