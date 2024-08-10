@@ -2,20 +2,12 @@ import { useCallback, useState } from "react";
 import { Progress, Button, Statistic } from "antd";
 import { useContext } from "react";
 import { QuizContext } from "../Helpers/Contexts";
+import { jsQuiz } from "./../../constants/questions";
 const { Countdown } = Statistic;
 import "./Quiz.css";
 
-type Questions = {
-  questions: Question[];
-};
-type Question = {
-  question: string;
-  choices: string[];
-  type: string;
-  correctAnswer: string;
-};
-
-const Quiz: React.FC<Questions> = ({ questions }) => {
+const Quiz = () => {
+  const questions = [...jsQuiz.questions] 
   const { setGameState } = useContext(QuizContext);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
