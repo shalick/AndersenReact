@@ -4,14 +4,19 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Start from "./components/Start/Start";
 import Quiz from "./components/Quiz/Quiz";
-import { jsQuiz } from "./constants/questions";
-
 import { QuizContext } from "./components/Helpers/Contexts";
 import Results from "./components/Results/Results";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [gameState, setGameState] = useState("start");
+  const GAME_STATE_MAP = {
+    start: Start,
+    quiz: Quiz,
+    results: Results,
+  };
+  const [gameState, setGameState] =
+    useState<keyof typeof GAME_STATE_MAP>("start");
+  const Component = GAME_STATE_MAP[gameState];
 
   return (
     <BrowserRouter>
@@ -20,16 +25,9 @@ function App() {
         <main className="container">
           <QuizContext.Provider value={{ gameState, setGameState }}>
             <Routes>
-              {gameState === "start" && <Route path="/" element={<Start />} />}
-              {gameState === "quiz" && (
-                <Route
-                  path="/quiz"
-                  element={<Quiz questions={jsQuiz.questions} />}
-                />
-              )}
-              {gameState === "results" && (
-                <Route path="/results" element={<Results />} />
-              )}
+              <Route path="/" element={<Component />} />
+              <Route path="/quiz" element={<Component />} />
+              <Route path="/results" element={<Component />} />
             </Routes>
           </QuizContext.Provider>
         </main>

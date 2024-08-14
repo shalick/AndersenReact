@@ -29,14 +29,20 @@ const Results = () => {
         <Link to="/quiz">
           <Button
             onClick={() => {
-              setGameState("start");
+              setGameState("quiz");
             }}
           >
             Restart
           </Button>
         </Link>
         <Link to="/">
-          <Button>Choose another quiz</Button>
+          <Button
+            onClick={() => {
+              setGameState("start");
+            }}
+          >
+            Choose another quiz
+          </Button>
         </Link>
       </div>
     </div>
