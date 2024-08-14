@@ -46,8 +46,15 @@ const Start = () => {
             Start quiz
           </Button>
         </Link>
-
-        <Button>See my stats</Button>
+        <Link to="/statistics">
+          <Button
+            onClick={() => {
+              setGameState("statistics");
+            }}
+          >
+            See my stats
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -16,10 +16,10 @@ const Modal: React.FC<ModalProps> = ({ setModalOpen }) => {
         <h2>Do you want to end the test?</h2>
         <div className="modal-buttons">
           <Button onClick={() => setModalOpen(false)}>Cancel</Button>
-          <Link to="/results">
+          <Link to="/">
             <Button
               onClick={() => {
-                setGameState("results");
+                setGameState("start");
                 setModalOpen(false);
               }}
             >
