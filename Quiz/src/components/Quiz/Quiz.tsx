@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
-import { Progress, Button, Statistic } from "antd";
+import { Progress, Button } from "antd";
 import { useContext } from "react";
 import { QuizContext } from "../Helpers/Contexts";
-const { Countdown } = Statistic;
 import "./Quiz.css";
 import { jsQuiz } from "./../../constants/questions";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
+import QuizCountdown from "../QuizCountdown/QuizCountdown";
 
 const Quiz = () => {
   const questions = [...jsQuiz.questions];
@@ -41,11 +41,7 @@ const Quiz = () => {
           </Button>
         ))}
       </div>
-      <Countdown
-        value={new Date().setMinutes(new Date().getMinutes() + 2)}
-        format="mm:ss"
-      />
-
+      <QuizCountdown />
       <Button
         onClick={() => {
           setModalOpen(true);
