@@ -5,7 +5,8 @@ import { QuizContext } from "../Helpers/Contexts";
 const { Countdown } = Statistic;
 import "./Quiz.css";
 import { jsQuiz } from "./../../constants/questions";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Modal from "../Modal/Modal";
 
 const Quiz = () => {
   const questions = [...jsQuiz.questions];
@@ -18,6 +19,7 @@ const Quiz = () => {
   }, [questions.length, setCurrentQuestion]);
   const navigate = useNavigate();
   const navigateToResults = () => navigate("/results");
+  const [isModalOpen, setModalOpen] = useState(false);
   return (
     <div className="quiz_card">
       <Progress
@@ -43,15 +45,15 @@ const Quiz = () => {
         value={new Date().setMinutes(new Date().getMinutes() + 2)}
         format="mm:ss"
       />
-      <Link to="/results">
-        <Button
-          onClick={() => {
-            setGameState("results");
-          }}
-        >
-          End quiz
-        </Button>
-      </Link>
+
+      <Button
+        onClick={() => {
+          setModalOpen(true);
+        }}
+      >
+        End quiz
+      </Button>
+      {isModalOpen && <Modal setModalOpen={setModalOpen} />}
     </div>
   );
 };
