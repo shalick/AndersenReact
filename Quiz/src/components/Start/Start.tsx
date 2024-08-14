@@ -9,7 +9,7 @@ const { Option } = Select;
 const Start = () => {
   const { setGameState } = useContext(QuizContext);
   return (
-    <div className="card">
+    <div className="start_card">
       <h2 className="settings_title">Settings:</h2>
       <div className="settings_select">
         <InputNumber min={5} max={15} defaultValue={5} />

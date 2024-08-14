@@ -1,37 +1,52 @@
 import { useCallback, useState } from "react";
 import { Progress, Button, Statistic } from "antd";
+import { useContext } from "react";
+import { QuizContext } from "../Helpers/Contexts";
+import { jsQuiz } from "./../../constants/questions";
 const { Countdown } = Statistic;
 import "./Quiz.css";
 
-type Questions = {
-  questions: Question[];
-};
-type Question = {
-  question: string;
-  choices: string[];
-  type: string;
-  correctAnswer: string;
-};
-
-const Quiz: React.FC<Questions> = ({ questions }) => {
+const Quiz = () => {
+  const questions = [...jsQuiz.questions] 
+  const { setGameState } = useContext(QuizContext);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
   const onChoiceClick = useCallback(() => {
-    setCurrentQuestion(prev => (prev < questions.length - 1) ? prev + 1 : 0);
-}, [questions.length, setCurrentQuestion]);
+    currentQuestion !== questions.length - 1 &&
+      setCurrentQuestion((prev) => prev + 1);
+  }, [questions.length, setCurrentQuestion]);
   return (
-    <div className="card">
-      <Progress percent={(currentQuestion / questions.length) * 100} />
+    <div className="quiz_card">
+      <Progress
+        percent={(currentQuestion / questions.length) * 100}
+        className="quiz_progress"
+      />
       <h2 className="question_text">{question}</h2>
       <div className="answer_buttons">
         {choices.map((choice) => (
-          <Button onClick={() => onChoiceClick()} key={choice}>
+          <Button
+            onClick={() =>
+              currentQuestion !== questions.length - 1
+                ? onChoiceClick()
+                : setGameState("results")
+            }
+            key={choice}
+          >
             {choice}
           </Button>
         ))}
       </div>
-      <Countdown value={new Date().setMinutes(new Date().getMinutes() + 2)} />
-      <Button>End quiz</Button>
+      <Countdown
+        value={new Date().setMinutes(new Date().getMinutes() + 2)}
+        format="mm:ss"
+      />
+      <Button
+        onClick={() => {
+          setGameState("results");
+        }}
+      >
+        End quiz
+      </Button>
     </div>
   );
 };
