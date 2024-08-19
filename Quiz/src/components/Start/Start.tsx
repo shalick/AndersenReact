@@ -3,11 +3,15 @@ import { useContext } from "react";
 import { QuizContext } from "../Helpers/Contexts";
 import { InputNumber } from "antd";
 import { Select, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
 const Start = () => {
   const { setGameState } = useContext(QuizContext);
+  const navigate = useNavigate();
+  const navigateToQuiz = () => navigate("/quiz");
+  const navigateToStatistics = () => navigate("/statistics");
   return (
     <div className="start_card">
       <h2 className="settings_title">Settings:</h2>
@@ -38,12 +42,20 @@ const Start = () => {
       <div className="start_buttons">
         <Button
           onClick={() => {
-            setGameState("quiz");
+            setGameState("/quiz");
+            navigateToQuiz();
           }}
         >
           Start quiz
         </Button>
-        <Button>See my stats</Button>
+        <Button
+          onClick={() => {
+            setGameState("/statistics");
+            navigateToStatistics();
+          }}
+        >
+          See my stats
+        </Button>
       </div>
     </div>
   );
