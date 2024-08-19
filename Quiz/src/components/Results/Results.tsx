@@ -3,11 +3,14 @@ import "./Results.css";
 import { Button } from "antd";
 import { QuizContext } from "../Helpers/Contexts";
 import { List, Statistic } from "antd";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const { Countdown } = Statistic;
 
 const Results = () => {
   const { setGameState } = useContext(QuizContext);
+  const navigate = useNavigate();
+  const navigateToStart = () => navigate("/");
+  const navigateToQuiz = () => navigate("/quiz");
   return (
     <div className="results_card">
       <h2>Thank you for completing this quiz. Here are your results</h2>
@@ -26,24 +29,22 @@ const Results = () => {
       />
 
       <div className="results_buttons">
-        <Link to="/quiz">
-          <Button
-            onClick={() => {
-              setGameState("quiz");
-            }}
-          >
-            Restart
-          </Button>
-        </Link>
-        <Link to="/">
-          <Button
-            onClick={() => {
-              setGameState("start");
-            }}
-          >
-            Choose another quiz
-          </Button>
-        </Link>
+        <Button
+          onClick={() => {
+            setGameState("/quiz");
+            navigateToQuiz();
+          }}
+        >
+          Restart
+        </Button>
+        <Button
+          onClick={() => {
+            setGameState("/");
+            navigateToStart();
+          }}
+        >
+          Choose another quiz
+        </Button>
       </div>
     </div>
   );

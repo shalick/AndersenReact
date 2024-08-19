@@ -11,13 +11,13 @@ import Statistics from "./components/Statistics/Statistics";
 
 function App() {
   const GAME_STATE_MAP = {
-    start: Start,
-    quiz: Quiz,
-    results: Results,
-    statistics: Statistics,
+    '/': Start,
+    '/quiz': Quiz,
+    '/results': Results,
+    '/statistics': Statistics,
   };
   const [gameState, setGameState] =
-    useState<keyof typeof GAME_STATE_MAP>("start");
+    useState<keyof typeof GAME_STATE_MAP>("/");
   const Component = GAME_STATE_MAP[gameState];
 
   return (
@@ -27,10 +27,7 @@ function App() {
         <main className="container">
           <QuizContext.Provider value={{ gameState, setGameState }}>
             <Routes>
-              <Route path="/" element={<Component />} />
-              <Route path="/quiz" element={<Component />} />
-              <Route path="/results" element={<Component />} />
-              <Route path="/statistics" element={<Component />} />
+              <Route path={gameState} element={<Component />} />
             </Routes>
           </QuizContext.Provider>
         </main>

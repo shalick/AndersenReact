@@ -3,13 +3,14 @@ import { Progress, Button } from "antd";
 import { useContext } from "react";
 import { QuizContext } from "../Helpers/Contexts";
 import "./Quiz.css";
-import { jsQuiz } from "./../../constants/questions";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import QuizCountdown from "../QuizCountdown/QuizCountdown";
+import { useSelector } from "react-redux";
+import { selectAllQuestions } from "../../redux/slices/questionsSlice";
 
 const Quiz = () => {
-  const questions = [...jsQuiz.questions];
+  const questions = useSelector(selectAllQuestions);
   const { setGameState } = useContext(QuizContext);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { question, choices } = questions[currentQuestion];
@@ -33,7 +34,7 @@ const Quiz = () => {
             onClick={() =>
               currentQuestion !== questions.length - 1
                 ? onChoiceClick()
-                : (navigateToResults(), setGameState("results"))
+                : (navigateToResults(), setGameState("/results"))
             }
             key={choice}
           >

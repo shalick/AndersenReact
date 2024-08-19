@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from "react";
 interface IContextProps {
   gameState: string;
   setGameState: Dispatch<
-    SetStateAction<"start" | "quiz" | "results" | "statistics">
+    SetStateAction<"/" | "/quiz" | "/results" | "/statistics">
   >;
 }
 
