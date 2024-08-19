@@ -19,7 +19,6 @@ function App() {
   const [gameState, setGameState] =
     useState<keyof typeof GAME_STATE_MAP>("/");
   const Component = GAME_STATE_MAP[gameState];
-
   return (
     <BrowserRouter>
       <div className="wrapper">
